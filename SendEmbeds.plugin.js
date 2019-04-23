@@ -38,7 +38,7 @@ SendEmbeds.prototype.getVersion = function() {
 };
 
 SendEmbeds.prototype.getAuthor = function() {
-	return "Originally written by Septeract, Modified by Fraser Price - https://github.com/Fraserbc";
+	return "Originally written by Septeract - https://github.com/hepteract/, Modified by Fraser Price - https://github.com/Fraserbc";
 };
 
 var token = "YOUR_TOKEN_HERE"; // Have to do this because localStorage.token no longer works
