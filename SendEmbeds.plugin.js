@@ -34,14 +34,12 @@ SendEmbeds.prototype.getDescription = function() {
 };
 
 SendEmbeds.prototype.getVersion = function() {
-	return "0.1";
+	return "0.2";
 };
 
 SendEmbeds.prototype.getAuthor = function() {
 	return "Originally written by Septeract - https://github.com/hepteract/, Modified by Fraser Price - https://github.com/Fraserbc";
 };
-
-var token = "YOUR_TOKEN_HERE"; // Have to do this because localStorage.token no longer works
 
 let sendEmbed = function(title, text, color) {
 	var channelID = window.location.pathname.split('/').pop();
@@ -58,27 +56,24 @@ let sendEmbed = function(title, text, color) {
 		embed.title = title;
 	}
 	
-	var data = JSON.stringify({embed : embed});
-	
-	console.log(data);
-	
-	$.ajax({
-		type : "POST",
-		url : "https://discordapp.com/api/channels/" + channelID + "/messages",
-		headers : {
-			//"authorization": localStorage.token.slice(1, -1)
-			"authorization": token
-		},
-		dataType : "json",
-		contentType : "application/json",
-		data: data,
-		error: (req, error, exception) => {
-			console.log(req.responseText);
+	let MessageQueue = DiscordInternals.WebpackModules.findByUniqueProperties(['enqueue']);
+	let MessageParser = DiscordInternals.WebpackModules.findByUniqueProperties(["createBotMessage"]);
+
+	let msg = MessageParser.createMessage(channelID, "");
+
+	MessageQueue.enqueue({
+		type: "send",
+		message: {
+			channelId: channelID,
+			content: this.msgContent,
+			tts: false,
+			nonce: msg.id,
+			embed: embed
 		}
-	});
+	}, r => { return; })
 }
 
-var lastKey = 0;
+let lastKey = 0;
 SendEmbeds.prototype.attachHandler = function() {
 	var el = $('.da-channelTextArea textArea');
 	if (el.length == 0) return;
