@@ -4,8 +4,12 @@ A plugin for Better Discord that allows you to send fancy embed messages like th
 
 ![Embed Example](https://raw.githubusercontent.com/Fraserbc/BetterDiscord-Embeds/master/images/embed_example1.PNG)
 
+# Disclaimer!
+## It is possible that Discord will ban and delete your account for using this plugin
+I can not be held responsible if this happens
+
 # Installation
-* Download this repository
+* Clone this repository
 * Copy SendEmbeds.plugin.js to your plugins folder, you can acces this by going into your user settings, plugins and clicking "Open Plugin Folder"
 
 # Usage
@@ -27,7 +31,9 @@ The same way you do it normally with `Shift + Enter`
 
 ## It's not working and I don't know why!?
 
-Just create an issue with all the detail you can and I will respond as soon as possible
+Try installing this plugin https://github.com/samogot/betterdiscord-plugins/tree/master/v2/1Lib%20Discord%20Internals
+
+And if that fails, create an issue with all the detail you can and I will respond as soon as possible
 
 # Credit
 
