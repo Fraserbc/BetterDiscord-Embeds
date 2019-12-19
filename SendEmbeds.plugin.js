@@ -17,7 +17,7 @@ SendEmbeds.prototype.onSwitch = function() {
 };
 
 SendEmbeds.prototype.stop = function() {
-	var el = $('.da-channelTextArea textArea');
+	var el = $('.da-textArea');
 	if (el.length == 0) return;
 
 	// Remove handlers and injected script
@@ -41,7 +41,7 @@ SendEmbeds.prototype.getAuthor = function() {
 	return "Originally written by Septeract - https://github.com/hepteract/, Modified by Fraser Price - https://github.com/Fraserbc";
 };
 
-let sendEmbed = function(title, text, color) {
+let sendEmbed = function(title, text, color, tag = "") {
 	var channelID = window.location.pathname.split('/').pop();
 	var embed = {
 		type : "rich",
@@ -65,7 +65,7 @@ let sendEmbed = function(title, text, color) {
 		type: "send",
 		message: {
 			channelId: channelID,
-			content: this.msgContent,
+			content: tag,
 			tts: false,
 			nonce: msg.id,
 			embed: embed
@@ -75,7 +75,7 @@ let sendEmbed = function(title, text, color) {
 
 let lastKey = 0;
 SendEmbeds.prototype.attachHandler = function() {
-	var el = $('.da-channelTextArea textArea');
+	var el = $('.da-textArea');
 	if (el.length == 0) return;
 	var self = this;
 
@@ -95,7 +95,8 @@ SendEmbeds.prototype.attachHandler = function() {
 			return;
 		}
 
-		var text = $(this).val();
+		var text = $(this)[0].innerText;
+		console.log(text);
 		if (!text.startsWith("/e")) {
 			//console.log(`Ignored text entry: ${text}`);
 			return;
@@ -124,7 +125,7 @@ SendEmbeds.prototype.attachHandler = function() {
 
 		sendEmbed(title, msg, color);
 		
-		$(this).val("");
+		$(this)[0].innerText = "";
 		$(this).css("height", "auto");
 		lastKey = 0;
 	}
