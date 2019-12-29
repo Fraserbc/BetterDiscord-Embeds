@@ -120,7 +120,7 @@ SendEmbeds.prototype.attachHandler = function() {
         embed = {
             title: "",
             description: "",
-            title_url: "",
+            url: "",
             color: "",
             timestamp: "",
             footer_image: "",
@@ -128,8 +128,8 @@ SendEmbeds.prototype.attachHandler = function() {
             thumbnail_image: "",
             image_url: "",
             author: "",
-            url: "",
-            icon_url: ""
+            author_url: "",
+            author_icon: ""
         }
 
         // Fill the embed
@@ -175,8 +175,8 @@ SendEmbeds.prototype.attachHandler = function() {
                 discordEmbed["title"] = embed["title"];
             } else if (keys[x] == "description") {
                 discordEmbed["description"] = embed["description"];
-            } else if (keys[x] == "tile_url") {
-                discordEmbed["url"] = embed["title_url"];
+            } else if (keys[x] == "url") {
+                discordEmbed["url"] = embed["url"];
             } else if (keys[x] == "color") {
                 discordEmbed["color"] = embed["color"];
             } else if (keys[x] == "timestamp") {
@@ -215,7 +215,7 @@ SendEmbeds.prototype.attachHandler = function() {
                 }
 
                 discordEmbed["author"]["name"] = embed["author"];
-            } else if (keys[x] == "url") {
+            } else if (keys[x] == "author_url") {
                 if (discordEmbed["author"] == undefined) {
                     discordEmbed["author"] = {};
                 }
@@ -224,8 +224,8 @@ SendEmbeds.prototype.attachHandler = function() {
                     discordEmbed["author"]["name"] = "test";
                 }
 
-                discordEmbed["author"]["url"] = embed["url"];
-            } else if (keys[x] == "icon_url") {
+                discordEmbed["author"]["url"] = embed["author_url"];
+            } else if (keys[x] == "author_icon") {
                 if (discordEmbed["author"] == undefined) {
                     discordEmbed["author"] = {};
                 }
@@ -234,7 +234,7 @@ SendEmbeds.prototype.attachHandler = function() {
                     discordEmbed["author"]["name"] = "test";
                 }
 
-                discordEmbed["author"]["icon_url"] = embed["icon_url"];
+                discordEmbed["author"]["icon_url"] = embed["author_icon"];
             }
         }
 
