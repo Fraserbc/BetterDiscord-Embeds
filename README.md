@@ -6,7 +6,7 @@ A plugin for Better Discord that allows you to send fancy embed messages like th
 
 # Disclaimer!
 ## It is possible that Discord will ban and delete your account for using this plugin
-I can not be held responsible if this happens
+I can not be held responsible if this happens.
 
 # Installation
 * Clone this repository
