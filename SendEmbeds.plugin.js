@@ -125,8 +125,8 @@ SendEmbeds.prototype.attachHandler = function() {
             timestamp: "",
             footer_image: "",
             footer: "",
-            thumbnail_image: "",
-            image_url: "",
+            thumbnail: "",
+            image: "",
             author: "",
             author_url: "",
             author_icon: ""
@@ -203,12 +203,12 @@ SendEmbeds.prototype.attachHandler = function() {
                 }
 
                 discordEmbed["footer"]["text"] = embed["footer"];
-            } else if (keys[x] == "thumbnail_image") {
+            } else if (keys[x] == "thumbnail") {
                 discordEmbed["thumbnail"] = {};
-                discordEmbed["thumbnail"]["url"] = embed["thumbnail_image"];
-            } else if (keys[x] == "image_url") {
+                discordEmbed["thumbnail"]["url"] = embed["thumbnail"];
+            } else if (keys[x] == "image") {
                 discordEmbed["image"] = {};
-                discordEmbed["image"]["url"] = embed["image_url"];
+                discordEmbed["image"]["url"] = embed["image"];
             } else if (keys[x] == "author") {
                 if (discordEmbed["author"] == undefined) {
                     discordEmbed["author"] = {};
