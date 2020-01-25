@@ -48,7 +48,7 @@ let sendEmbed = function(embed) {
     let MessageQueue = DiscordInternals.WebpackModules.findByUniqueProperties(['enqueue']);
     let MessageParser = DiscordInternals.WebpackModules.findByUniqueProperties(["createBotMessage"]);
 
-    let msg = MessageParser.createMessage(channelID, "");
+    let msg = MessageParser.createBotMessage(channelID, "");
 
     // Send the message
     MessageQueue.enqueue({
@@ -62,7 +62,7 @@ let sendEmbed = function(embed) {
         }
     }, r => {
         return;
-    })
+    });
 }
 
 // Split a string on only the first delimeter
