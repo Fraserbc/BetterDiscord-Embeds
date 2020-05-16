@@ -190,11 +190,12 @@ SendEmbeds.prototype.attachHandler = function() {
                 discordEmbed["color"] = embed["color"];
             } else if (keys[x] == "timestamp") {
                 // Check if we want a timestamp
-                if (embed["timestamp"].toLowerCase() != "true") {
+                if (!embed["timestamp"].toLowerCase().startsWith("true")) {
                     continue;
                 }
 
                 timestamp = (new Date).toISOString();
+                console.log(timestamp)
                 discordEmbed["timestamp"] = timestamp;
             } else if (keys[x] == "footer_image") {
                 if (discordEmbed["footer"] == undefined) {
