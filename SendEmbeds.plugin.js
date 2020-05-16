@@ -107,7 +107,7 @@ SendEmbeds.prototype.attachHandler = function() {
         text = text.replace("/e ", "");
 
         // Split it by newlines
-        text = text.split("\n");
+        text = text.split("\n\n");
 
         // For every line, split it by : to get the arguments
         for (var x = 0; x < text.length; x++) {
@@ -147,6 +147,8 @@ SendEmbeds.prototype.attachHandler = function() {
                 embed[attrb_last] += "\n" + value;
             }
         }
+
+        console.log(embed)
 
         // Find the unused fields
         unused = []
