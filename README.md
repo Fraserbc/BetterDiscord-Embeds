@@ -35,6 +35,7 @@ Here's an example:
 ```
 /e title: My cool title
 description: Cool embeds
+Wow! Multiline
 url: https://discordapp.com
 color: #1243ff
 timestamp: true
