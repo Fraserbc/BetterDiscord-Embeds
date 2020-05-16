@@ -107,7 +107,8 @@ SendEmbeds.prototype.attachHandler = function() {
         text = text.replace("/e ", "");
 
         // Split it by newlines
-        text = text.split("\n\n");
+        text = text.replace("\n\n", "\n");
+        text = text.split("\n");
 
         // For every line, split it by : to get the arguments
         for (var x = 0; x < text.length; x++) {
