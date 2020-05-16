@@ -33,7 +33,7 @@ SendEmbeds.prototype.getDescription = function() {
 };
 
 SendEmbeds.prototype.getVersion = function() {
-    return "1.0";
+    return "2.0";
 };
 
 SendEmbeds.prototype.getAuthor = function() {
@@ -82,7 +82,7 @@ SendEmbeds.prototype.attachHandler = function() {
     // Handler to catch key events
     this.handleKeypress = function(e) {
         var code = e.keyCode || e.which;
-        console.log(lastKey);
+
         if (code !== 13) {
             //console.log(`Ignored keypress: ${code}`);
             lastKey = code;
@@ -91,7 +91,6 @@ SendEmbeds.prototype.attachHandler = function() {
 
         //Catch Shift + Enter and allow multiline
         if (lastKey == 16) {
-            //console.log(lastKey);
             return;
         }
 
@@ -113,7 +112,10 @@ SendEmbeds.prototype.attachHandler = function() {
         // For every line, split it by : to get the arguments
         for (var x = 0; x < text.length; x++) {
             text[x] = splitSingle(text[x], ":");
-            text[x][1] = text[x][1].replace(" ", "", 1);
+
+            if(text[x][1].startsWith(" ")) {
+                text[x][1] = text[x][1].replace(" ", "", 1);
+            }
         }
 
         // Create the embed structure
@@ -133,12 +135,16 @@ SendEmbeds.prototype.attachHandler = function() {
         }
 
         // Fill the embed
+        var attrb_last = "";
         for (var x = 0; x < text.length; x++) {
             var attrb = text[x][0];
             var value = text[x][1];
 
             if (embed[attrb] != undefined) {
                 embed[attrb] = value;
+                attrb_last = attrb;
+            } else {
+                embed[attrb_last] += "\n" + value;
             }
         }
 
@@ -238,7 +244,7 @@ SendEmbeds.prototype.attachHandler = function() {
             }
         }
 
-        console.log(embed);
+        //console.log(embed);
 
         // Send the embed
         sendEmbed(discordEmbed);

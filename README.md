@@ -51,9 +51,7 @@ author_icon: https://cdn.discordapp.com/embed/avatars/0.png
 
 ## How do I do multiline embeds?
 
-~~The same way you do it normally with `Shift + Enter`~~
-
-The current update has broken this functionality. This will be fixed a some point in the future
+The same way you do it normally with `Shift + Enter`
 
 ## It's not working and I don't know why!?
 
