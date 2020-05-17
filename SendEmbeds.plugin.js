@@ -107,8 +107,11 @@ SendEmbeds.prototype.attachHandler = function() {
         text = text.replace("/e ", "");
 
         // Split it by newlines
-        text = text.replace("\n\n", "\n");
+        text = text.replace(/\n\n/g, "\n");
         text = text.split("\n");
+
+        text = text.slice(0, text.length-1);
+
 
         // For every line, split it by : to get the arguments
         for (var x = 0; x < text.length; x++) {
@@ -145,7 +148,7 @@ SendEmbeds.prototype.attachHandler = function() {
                 embed[attrb] = value;
                 attrb_last = attrb;
             } else {
-                embed[attrb_last] += "\n" + value;
+                embed[attrb_last] += "\n" + text[x].join(":");
             }
         }
 
