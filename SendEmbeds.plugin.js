@@ -32,7 +32,7 @@ SendEmbeds.prototype.getDescription = function() {
 };
 
 SendEmbeds.prototype.getVersion = function() {
-    return "3.0";
+    return "2.0";
 };
 
 SendEmbeds.prototype.getAuthor = function() {
@@ -131,27 +131,35 @@ SendEmbeds.prototype.attachHandler = function() {
         // Strip away the /e
         text = text.replace("/e ", "");
 
+        text = text.replace(/[^\x00-\x7F]*/g, "");
         // Split it by newlines
         text = text.replace(/\n\n/g, "\n");
         text = text.split("\n");
 
         // For every line, split it by : to get the arguments
         for (var x = 0; x < text.length; x++) {
-            console.log(text[x])
-            text[x] = splitSingle(text[x], ":");
+            var line = text[x]
+            if(line.startsWith(":")) {
+                text[x] = []
+                text[x].push("")
+                text[x].push(line)
+                continue;
+            }
+            text[x] = splitSingle(line, ":");
 
             if(text[x][1].startsWith(" ")) {
                 text[x][1] = text[x][1].replace(" ", "", 1);
             }
         }
-
+        console.log(text)
         // Create the embed
+        fields = ["title", "description", "url", "color", "timestamp", "footer_image", "footer", "thumbnail", "image", "author", "author_url", "author_icon"]
         embed = {}
         for (var x = 0; x < text.length; x++) {
             var attrb = text[x][0];
             var value = text[x][1];
 
-            if (attrb != "") {
+            if (fields.includes(attrb)) {
                 embed[attrb] = value;
                 attrb_last = attrb;
             } else {
