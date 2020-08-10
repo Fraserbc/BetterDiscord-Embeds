@@ -16,11 +16,10 @@ SendEmbeds.prototype.onSwitch = function() {
 };
 
 SendEmbeds.prototype.stop = function() {
-    var el = $('.da-textArea');
+    var el = $('.da-form');
     if (el.length == 0) return;
 
     // Remove handlers and injected script
-    el.unbind("click focus", this.focusHandler);
     el[0].removeEventListener("keydown", this.handleKeypress);
 };
 
@@ -33,7 +32,7 @@ SendEmbeds.prototype.getDescription = function() {
 };
 
 SendEmbeds.prototype.getVersion = function() {
-    return "2.0";
+    return "3.0";
 };
 
 SendEmbeds.prototype.getAuthor = function() {
@@ -52,7 +51,7 @@ let sendEmbed = function(embed) {
 
     // Send the message
     MessageQueue.enqueue({
-        type: "send",
+        type: 0,
         message: {
             channelId: channelID,
             content: "",
@@ -65,6 +64,15 @@ let sendEmbed = function(embed) {
     });
 }
 
+// Get the deepest child of a parent
+let getDeepest = function(elem) {
+    if(elem.firstChild == null) {
+        return elem;
+    } else {
+        return getDeepest(elem.firstChild)
+    }
+}
+
 // Split a string on only the first delimeter
 let splitSingle = function(str, delimeter) {
     part1 = str.substr(0, str.indexOf(delimeter));
@@ -75,7 +83,7 @@ let splitSingle = function(str, delimeter) {
 
 let lastKey = 0;
 SendEmbeds.prototype.attachHandler = function() {
-    var el = $('.da-textArea');
+    var el = $('.da-form');
     if (el.length == 0) return;
     var self = this;
 
@@ -94,7 +102,24 @@ SendEmbeds.prototype.attachHandler = function() {
             return;
         }
 
-        var text = $(this)[0].innerText;
+        // Parse the text
+        var elements = Array.from(document.getElementsByClassName("da-slateTextArea")[0].children);
+        var text = ""
+        elements.forEach(function(l0) {
+            Array.from(l0.children).forEach(function(l1) {
+                Array.from(l1.children).forEach(function(elem) {
+                    elem = getDeepest(elem);
+                    if(elem.alt) {
+                        text += elem.alt;
+                    } else {
+                        text += elem.textContent;
+                    }
+                });
+            });
+            text += "\n";
+        });
+
+        
         if (!text.startsWith("/e")) {
             //console.log(`Ignored text entry: ${text}`);
             return;
@@ -110,11 +135,9 @@ SendEmbeds.prototype.attachHandler = function() {
         text = text.replace(/\n\n/g, "\n");
         text = text.split("\n");
 
-        text = text.slice(0, text.length-1);
-
-
         // For every line, split it by : to get the arguments
         for (var x = 0; x < text.length; x++) {
+            console.log(text[x])
             text[x] = splitSingle(text[x], ":");
 
             if(text[x][1].startsWith(" ")) {
@@ -122,36 +145,19 @@ SendEmbeds.prototype.attachHandler = function() {
             }
         }
 
-        // Create the embed structure
-        embed = {
-            title: "",
-            description: "",
-            url: "",
-            color: "",
-            timestamp: "",
-            footer_image: "",
-            footer: "",
-            thumbnail: "",
-            image: "",
-            author: "",
-            author_url: "",
-            author_icon: ""
-        }
-
-        // Fill the embed
-        var attrb_last = "";
+        // Create the embed
+        embed = {}
         for (var x = 0; x < text.length; x++) {
             var attrb = text[x][0];
             var value = text[x][1];
 
-            if (embed[attrb] != undefined) {
+            if (attrb != "") {
                 embed[attrb] = value;
                 attrb_last = attrb;
             } else {
-                embed[attrb_last] += "\n" + text[x].join(":");
+                embed[attrb_last] += "\n" + value;
             }
         }
-
         console.log(embed)
 
         // Find the unused fields
