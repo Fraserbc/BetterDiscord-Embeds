@@ -41,8 +41,8 @@ color: #1243ff
 timestamp: true
 footer_image: https://cdn.discordapp.com/embed/avatars/0.png
 footer: WOW! Footers!
-thumbnail_image: https://cdn.discordapp.com/embed/avatars/0.png
-image_url: https://cdn.discordapp.com/embed/avatars/0.png
+thumbnail: https://cdn.discordapp.com/embed/avatars/0.png
+image: https://cdn.discordapp.com/embed/avatars/0.png
 author: ABCD
 author_url: https://discordapp.com
 author_icon: https://cdn.discordapp.com/embed/avatars/0.png
