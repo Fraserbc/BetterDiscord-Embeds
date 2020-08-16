@@ -32,7 +32,7 @@ SendEmbeds.prototype.getDescription = function() {
 };
 
 SendEmbeds.prototype.getVersion = function() {
-    return "2.0";
+    return "3.0";
 };
 
 SendEmbeds.prototype.getAuthor = function() {
@@ -131,7 +131,9 @@ SendEmbeds.prototype.attachHandler = function() {
         // Strip away the /e
         text = text.replace("/e ", "");
 
-        text = text.replace(/[^\x00-\x7F]*/g, "");
+        // Remove a stupid character discord adds
+        text = text.replace("\uFEFF", "");
+
         // Split it by newlines
         text = text.replace(/\n\n/g, "\n");
         text = text.split("\n");
