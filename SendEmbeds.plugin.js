@@ -153,7 +153,7 @@ SendEmbeds.prototype.attachHandler = function() {
                 text[x][1] = text[x][1].replace(" ", "", 1);
             }
         }
-        console.log(text)
+
         // Create the embed
         fields = ["title", "description", "url", "color", "timestamp", "footer_image", "footer", "thumbnail", "image", "author", "author_url", "author_icon"]
         embed = {}
@@ -168,7 +168,6 @@ SendEmbeds.prototype.attachHandler = function() {
                 embed[attrb_last] += "\n" + value;
             }
         }
-        console.log(embed)
 
         // Find the unused fields
         unused = []
@@ -267,12 +266,9 @@ SendEmbeds.prototype.attachHandler = function() {
             }
         }
 
-        //console.log(embed);
-
         // Send the embed
         sendEmbed(discordEmbed);
 
-        //$(this)[0].innerText = "";
         $(this).css("height", "auto");
         lastKey = 0;
     }
