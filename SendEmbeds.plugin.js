@@ -83,7 +83,7 @@ let splitSingle = function(str, delimeter) {
 
 let lastKey = 0;
 SendEmbeds.prototype.attachHandler = function() {
-    var el = $('.da-form');
+    var el = $('form[class^="form-"]')[0];
     if (el.length == 0) return;
     var self = this;
 
