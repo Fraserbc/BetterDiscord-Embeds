@@ -103,22 +103,27 @@ SendEmbeds.prototype.attachHandler = function() {
 
         // Parse the text
         var elements = Array.from($('div[class^="textArea-"]')[0].children[0].children);
-        console.log(elements);
         var text = "";
-        elements.forEach(function(elem) {
-            elem = getDeepest(elem);
-            if(elem.alt) {
-                text += elem.alt;
-            } else {
-                text += elem.textContent;
-            }
+        elements.forEach(function(l0) {
+            Array.from(l0.children).forEach(function(l1) {
+                Array.from(l1.children).forEach(function(elem) {
+                    console.log(elem);
+                    elem = getDeepest(elem);
+                    if(elem.alt) {
+                        text += elem.alt;
+                    } else {
+                        text += elem.textContent;
+                    }
+                });
+            });
             text += "\n";
         });
-        
         if (!text.startsWith("/e")) {
             //console.log(`Ignored text entry: ${text}`);
             return;
         }
+
+        console.log(text);
 
         e.preventDefault();
         e.stopPropagation();
