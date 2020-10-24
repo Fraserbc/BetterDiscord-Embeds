@@ -85,7 +85,6 @@ let lastKey = 0;
 SendEmbeds.prototype.attachHandler = function() {
     var el = $('form[class^="form-"]');
     if (el.length == 0) return;
-    var self = this;
 
     // Handler to catch key events
     this.handleKeypress = function(e) {
@@ -103,19 +102,16 @@ SendEmbeds.prototype.attachHandler = function() {
         }
 
         // Parse the text
-        var elements = Array.from($('div[class^="textArea-"]')[0].children);
-        var text = ""
-        elements.forEach(function(l0) {
-            Array.from(l0.children).forEach(function(l1) {
-                Array.from(l1.children).forEach(function(elem) {
-                    elem = getDeepest(elem);
-                    if(elem.alt) {
-                        text += elem.alt;
-                    } else {
-                        text += elem.textContent;
-                    }
-                });
-            });
+        var elements = Array.from($('div[class^="textArea-"]')[0].children[0].children);
+        console.log(elements);
+        var text = "";
+        elements.forEach(function(elem) {
+            elem = getDeepest(elem);
+            if(elem.alt) {
+                text += elem.alt;
+            } else {
+                text += elem.textContent;
+            }
             text += "\n";
         });
         
