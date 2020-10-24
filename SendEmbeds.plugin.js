@@ -36,7 +36,7 @@ SendEmbeds.prototype.getVersion = function() {
 };
 
 SendEmbeds.prototype.getAuthor = function() {
-    return "Originally written by Septeract - https://github.com/hepteract/, Modified by Fraser Price - https://github.com/Fraserbc";
+    return "Originally written by Septeract - https://github.com/hepteract/, Modified by Fraserbc - https://github.com/Fraserbc";
 };
 
 let sendEmbed = function(embed) {
@@ -103,7 +103,7 @@ SendEmbeds.prototype.attachHandler = function() {
         }
 
         // Parse the text
-        var elements = Array.from(document.getElementsByClassName("da-slateTextArea")[0].children);
+        var elements = Array.from($('div[class^="textArea-"]')[0].children);
         var text = ""
         elements.forEach(function(l0) {
             Array.from(l0.children).forEach(function(l1) {
@@ -118,7 +118,6 @@ SendEmbeds.prototype.attachHandler = function() {
             });
             text += "\n";
         });
-
         
         if (!text.startsWith("/e")) {
             //console.log(`Ignored text entry: ${text}`);
@@ -153,7 +152,7 @@ SendEmbeds.prototype.attachHandler = function() {
                 text[x][1] = text[x][1].replace(" ", "", 1);
             }
         }
-
+        console.log(text)
         // Create the embed
         fields = ["title", "description", "url", "color", "timestamp", "footer_image", "footer", "thumbnail", "image", "author", "author_url", "author_icon"]
         embed = {}
@@ -168,6 +167,7 @@ SendEmbeds.prototype.attachHandler = function() {
                 embed[attrb_last] += "\n" + value;
             }
         }
+        console.log(embed)
 
         // Find the unused fields
         unused = []
@@ -266,9 +266,12 @@ SendEmbeds.prototype.attachHandler = function() {
             }
         }
 
+        //console.log(embed);
+
         // Send the embed
         sendEmbed(discordEmbed);
 
+        //$(this)[0].innerText = "";
         $(this).css("height", "auto");
         lastKey = 0;
     }
