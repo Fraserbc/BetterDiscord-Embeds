@@ -138,37 +138,30 @@ SendEmbeds.prototype.attachHandler = function() {
         text = text.replace(/\n\n/g, "\n");
         text = text.split("\n");
 
-        // For every line, split it by : to get the arguments
-        for (var x = 0; x < text.length; x++) {
-            var line = text[x]
-            if(line.startsWith(":")) {
-                text[x] = []
-                text[x].push("")
-                text[x].push(line)
-                continue;
-            }
-            text[x] = splitSingle(line, ":");
-
-            if(text[x][1].startsWith(" ")) {
-                text[x][1] = text[x][1].replace(" ", "", 1);
-            }
-        }
-        console.log(text)
         // Create the embed
         fields = ["title", "description", "url", "color", "timestamp", "footer_image", "footer", "thumbnail", "image", "author", "author_url", "author_icon"]
         embed = {}
+        last_attrb = ""
         for (var x = 0; x < text.length; x++) {
-            var attrb = text[x][0];
-            var value = text[x][1];
+            var line = text[x]
+            var split = splitSingle(line, ":");
 
-            if (fields.includes(attrb)) {
-                embed[attrb] = value;
-                attrb_last = attrb;
+            // Check if it is an attribute or continuation of previous
+            if(fields.includes(split[0])) {
+                // Check if there is a leading " "
+                if(split[1].startsWith(" ")) {
+                    embed[split[0]] = split[1].slice(1);
+                } else {
+                    embed[split[0]] = split[1];
+                }
+
+                // Store the last attribute to be set so we can have multi-line
+                last_attrb = split[0];
             } else {
-                embed[attrb_last] += "\n" + value;
+                embed[last_attrb] += "\n" + line;
             }
         }
-        console.log(embed)
+        console.log(embed);
 
         // Find the unused fields
         unused = []
