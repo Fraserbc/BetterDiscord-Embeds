@@ -1,16 +1,16 @@
 # BetterDiscord-Embeds
 
-A plugin for Better Discord that allows you to send fancy embed messages like this
+A plugin for Better Discord that allows you to send fancy embed messages like this:
 
 ![Embed Example](https://raw.githubusercontent.com/Fraserbc/BetterDiscord-Embeds/master/images/embed_example1.PNG)
 
 # Disclaimer!
 ## It is possible that Discord will ban and delete your account for using this plugin
-I can not be held responsible if this happens.
+I can not be held responsible if this happens. Using custom clients and plugins is a breach of Discord's Terms of Service.
 
 # Installation
 * Clone this repository
-* Copy SendEmbeds.plugin.js to your plugins folder, you can acces this by going into your user settings, plugins and clicking "Open Plugin Folder"
+* Copy SendEmbeds.plugin.js to your plugins folder, you can access this by going into your user settings, plugins and clicking "Open Plugin Folder"
 
 # Usage
 ```
@@ -52,13 +52,13 @@ author_icon: https://cdn.discordapp.com/embed/avatars/0.png
 
 ## How do I do multiline embeds?
 
-The same way you do it normally with `Shift + Enter`
+The same way you do it normally with `Shift + Enter`.
 
 ## It's not working and I don't know why!?
 
-Try installing this plugin https://github.com/samogot/betterdiscord-plugins/blob/master/v1/1lib_discord_internals.plugin.js
+Try installing this plugin: https://github.com/samogot/betterdiscord-plugins/blob/master/v1/1lib_discord_internals.plugin.js
 
-And if that fails, create an issue with all the detail you can and I will respond as soon as possible
+And if that fails, create an issue with all the details you can give and I will respond as soon as possible.
 
 # Credit
 
