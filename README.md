@@ -65,5 +65,3 @@ And if that fails, create an issue with all the details you can give and I will 
 I would like to give credit to Septeract, https://github.com/hepteract/, as he originally wrote the code this is based off. Here is the original gist for anyone interested.
 
 https://gist.github.com/hepteract/8d9199a6a154dd32a1c4ced97de76043
-
-Come visit me on discord! DeltaDeveloper#5381
