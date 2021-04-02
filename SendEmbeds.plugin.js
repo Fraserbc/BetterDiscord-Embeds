@@ -20,7 +20,7 @@ SendEmbeds.prototype.stop = function() {
     if (el.length == 0) return;
 
     // Remove handlers and injected script
-    el[0].removeEventListener("keydown", this.handleKeypress);
+    el.removeEventListener("keydown", this.handleKeypress);
 };
 
 SendEmbeds.prototype.getName = function() {
@@ -83,12 +83,14 @@ let splitSingle = function(str, delimeter) {
 
 let lastKey = 0;
 SendEmbeds.prototype.attachHandler = function() {
-    var el = $('form[class^="form-"]');
+    var el = document.querySelectorAll('form[class^="form-"]');
     if (el.length == 0) return;
 
     // Handler to catch key events
     this.handleKeypress = function(e) {
         var code = e.keyCode || e.which;
+
+        console.log("abcd");
 
         if (code !== 13) {
             //console.log(`Ignored keypress: ${code}`);
@@ -102,7 +104,7 @@ SendEmbeds.prototype.attachHandler = function() {
         }
 
         // Parse the text
-        var elements = Array.from($('div[class^="textArea-"]')[0].children[0].children);
+        var elements = Array.from(document.querySelectorAll('div[class^="textArea-"]')[0].children[0].children);
         var text = "";
         elements.forEach(function(l0) {
             Array.from(l0.children).forEach(function(l1) {
@@ -130,6 +132,8 @@ SendEmbeds.prototype.attachHandler = function() {
 
         // Strip away the /e
         text = text.replace("/e ", "");
+
+        console.log(text);
 
         // Remove a stupid character discord adds
         text = text.replace("\uFEFF", "");
