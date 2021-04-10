@@ -3,11 +3,48 @@
  * @author Fraserbc
  * @version 2.0.0
  * @description Allows you to send embeds
- * @source https://github.com/Fraserbc/BetterDiscord-Embeds
+ * @website https://github.com/Fraserbc/BetterDiscord-Embeds
+ * @source https://raw.githubusercontent.com/Fraserbc/BetterDiscord-Embeds/master/SendEmbeds.plugin.js
  * @updateUrl https://raw.githubusercontent.com/Fraserbc/BetterDiscord-Embeds/master/SendEmbeds.plugin.js
  */
+ 
+ const config = {
+    info: {
+        name: "SendEmbeds",
+        authors: [
+            {
+                name: "Fraserbc",
+                github_username: "Fraserbc"
+            }
+        ],
+        version: "2.0.0",
+        description: "Allows you to send embeds",
+        github: "https://github.com/Fraserbc/BetterDiscord-Embeds",
+        github_raw: "https://raw.githubusercontent.com/Fraserbc/BetterDiscord-Embeds/master/SendEmbeds.plugin.js"
+    }
+};
 
  module.exports = class {
+    constructor() {
+        this._config = config;
+    }
+
+    getName() {
+        return config.info.name;
+    }
+
+    getAuthor() {
+        return config.info.authors.map(author => author.name).join(", ");
+    }
+
+    getDescription() {
+        return config.info.description;
+    }
+
+    getVersion() {
+        return config.info.version;
+    }
+
 	load() {}
 	unload() {}
 	start() { this.attachHandler(); }
@@ -33,12 +70,12 @@
 
 	// Function that sends the embed
 	sendEmbed(embed) {
-		// Get the ID of the channel we want ot send the embed to
-		let channelID = window.location.pathname.split('/').pop();
+		// Get the ID of the channel we want to send the embed
+		let channelID = BdApi.findModuleByProps('getChannelId').getChannelId();
 	
 		// Create the message
-		let MessageQueue = DiscordInternals.WebpackModules.findByUniqueProperties(['enqueue']);
-		let MessageParser = DiscordInternals.WebpackModules.findByUniqueProperties(['createBotMessage']);
+		let MessageQueue = BdApi.findModuleByProps('enqueue');
+		let MessageParser = BdApi.findModuleByProps('createBotMessage');
 	
 		let msg = MessageParser.createBotMessage(channelID, "");
 	
