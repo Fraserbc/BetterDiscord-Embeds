@@ -56,9 +56,7 @@ The same way you do it normally with `Shift + Enter`.
 
 ## It's not working and I don't know why!?
 
-Try installing this plugin: https://github.com/samogot/betterdiscord-plugins/blob/master/v1/1lib_discord_internals.plugin.js
-
-And if that fails, create an issue with all the details you can give and I will respond as soon as possible.
+Create an issue with all the details you can give and I will respond as soon as possible.
 
 # Credit
 
