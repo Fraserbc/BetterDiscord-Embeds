@@ -237,7 +237,6 @@ module.exports = class {
 		}
 
 		// Send the embed
-		console.log(this);
 		this.sendEmbed(discordEmbed);
 
 		this.lastKey = 0;
