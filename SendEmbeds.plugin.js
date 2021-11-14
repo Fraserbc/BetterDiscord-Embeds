@@ -68,7 +68,7 @@ module.exports = class {
 	// Function that sends the embed
 	sendEmbed(embed) {
 		// Get the ID of the channel we want to send the embed
-		let channelID = BdApi.findModuleByProps("getLastSelectedChannelId").getChannelId();
+		let channelID = BdApi.findModuleByProps('getLastSelectedChannelId').getChannelId();
 
 		// Create the message
 		let MessageQueue = BdApi.findModuleByProps('enqueue');
