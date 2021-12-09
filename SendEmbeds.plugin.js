@@ -6,7 +6,7 @@
  * @website https://github.com/Fraserbc
  * @source https://github.com/Fraserbc/BetterDiscord-Embeds/blob/master/SendEmbeds.plugin.js
  */
- 
+
  const config = {
     info: {
         name: 'SendEmbeds',
@@ -60,7 +60,7 @@ module.exports = class {
 		this.handler = this.handleKeypress.bind(this);
 		let el = document.querySelectorAll('form[class^="form-');
 		if (el.length == 0) return;
-	
+
 		// Bind the handler
 		el[0].addEventListener('keydown', this.handler, false);
 	}
@@ -68,14 +68,14 @@ module.exports = class {
 	// Function that sends the embed
 	sendEmbed(embed) {
 		// Get the ID of the channel we want to send the embed
-		let channelID = BdApi.findModuleByProps('getChannelId').getChannelId();
-	
+		let channelID = BdApi.findModuleByProps('getLastSelectedChannelId').getChannelId();
+
 		// Create the message
 		let MessageQueue = BdApi.findModuleByProps('enqueue');
 		let MessageParser = BdApi.findModuleByProps('createBotMessage');
-	
+
 		let msg = MessageParser.createBotMessage(channelID, '');
-	
+
 		// Send the message
 		MessageQueue.enqueue({
 			type: 0,
@@ -237,7 +237,6 @@ module.exports = class {
 		}
 
 		// Send the embed
-		console.log(this);
 		this.sendEmbed(discordEmbed);
 
 		this.lastKey = 0;
