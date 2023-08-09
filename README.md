@@ -1,3 +1,7 @@
+# Update
+
+This plugin no longer works, Discord patched it a few years ago now.
+
 # BetterDiscord-Embeds
 
 A plugin for Better Discord that allows you to send fancy embed messages like this:
